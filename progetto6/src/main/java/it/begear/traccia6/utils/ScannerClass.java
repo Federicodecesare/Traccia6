@@ -1,4 +1,4 @@
-package it.begear.utils;
+package it.begear.traccia6.utils;
 
 import java.util.Scanner;
 
