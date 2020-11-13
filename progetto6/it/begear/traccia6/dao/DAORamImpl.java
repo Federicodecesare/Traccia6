@@ -4,6 +4,7 @@ package it.begear.traccia6.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -63,21 +64,55 @@ public class DAORamImpl implements DAORam{
 	
 
 	public void updateRam(Ram ram) {
+		String sql = "UPDATE ram SET Id=?, Nome=?, Produttore=?, Capacita=?, CodConfig=?, Quantita=?, Prezzo=?";
 		
-		
+		try(PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
+			
+			stm.setInt(1, ram.getId());
+			stm.setString(2, ram.getNome());
+			stm.setString(3, ram.getProduttore());
+			stm.setString(4, ram.getCapacita());
+			stm.setInt(5, ram.getCodConfig());
+			stm.setInt(6, ram.getQuantita());
+			stm.setInt(7, ram.getPrezzo());
+			stm.execute();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
-	
-	
-	
 
 	public List<Ram> readAll() {
+		String sql = "SELECT * FROM ram";
+		List<Ram> list = null;
 		
-		
-		
-		
-		
-		return null;
+		try(PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
+			
+			ResultSet result = stm.executeQuery();
+			list = new ArrayList<Ram>();
+			
+			while(result.next()) {
+				Ram ram = new Ram();
+				
+				ram.setId(result.getInt("Id"));
+				ram.setNome(result.getString("Nome"));
+				ram.setProduttore(result.getString("Produttore"));
+				ram.setCapacita(result.getString("Capacita"));
+				ram.setCodConfig(result.getInt("CodConfig"));
+				ram.setQuantita(result.getInt("Quantita"));
+				ram.setPrezzo(result.getInt("Prezzo"));
+				
+				list.add(ram);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
 	}
 
 }
