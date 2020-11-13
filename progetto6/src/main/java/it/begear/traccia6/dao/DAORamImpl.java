@@ -32,8 +32,6 @@ public class DAORamImpl implements DAORam{
 		}
 		
 	}
-	
-	
 
 	public Ram readRam(int Id) {
 		String sql = "SELECT * FROM ram WHERE Id = ?";
@@ -57,20 +55,15 @@ public class DAORamImpl implements DAORam{
 				
 			}
 			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();			
 		}
-		
-		
-		
 		return ram;
 	}
 	
-	
-	
 
 	public void updateRam(Ram ram) {
+		
 		
 		
 	}
@@ -79,6 +72,10 @@ public class DAORamImpl implements DAORam{
 	
 
 	public List<Ram> readAll() {
+		
+		
+		
+		
 		
 		return null;
 	}
