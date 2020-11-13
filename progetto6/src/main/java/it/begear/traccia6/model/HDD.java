@@ -13,7 +13,17 @@ public class HDD {
 	public HDD() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public HDD(String produttore, String nome, String capacita, int codConfig, int quantita, int prezzo) {
 
+		this.Produttore = produttore;
+		this.Nome = nome;
+		this.Capacita = capacita;
+		this.CodConfig = codConfig;
+		this.Quantita = quantita;
+		this.Prezzo = prezzo;
+	}
+	
 	public HDD(int id, String produttore, String nome, String capacita, int codConfig, int quantita, int prezzo) {
 		super();
 		this.Id = id;
