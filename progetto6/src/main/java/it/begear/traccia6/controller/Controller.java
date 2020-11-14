@@ -2,8 +2,13 @@ package it.begear.traccia6.controller;
 
 import java.util.List;
 
+import it.begear.traccia6.dao.DAOComputer;
+import it.begear.traccia6.dao.DAOComputerImpl;
 import it.begear.traccia6.dao.DAOHDD;
 import it.begear.traccia6.dao.DAOHDDImpl;
+import it.begear.traccia6.dao.DAORam;
+import it.begear.traccia6.dao.DAORamImpl;
+import it.begear.traccia6.model.Computer;
 import it.begear.traccia6.model.HDD;
 import it.begear.traccia6.utils.ScannerClass;
 import it.begear.traccia6.view.Cli;
@@ -11,7 +16,7 @@ import it.begear.traccia6.view.Cli;
 public class Controller {
 
 	public static void main(String[] args) {
-
+		
 		int K = 0;
 		while (K != 6) {
 
