@@ -106,14 +106,15 @@ public class DAOSsdimpls implements DAOSsd {
 
 	}
 	@Override
-	public SSD readSsdcompatibile(int id) {
+	public List<SSD> readSsdcompatibile(int id) {
 		String sql="Select * FROM ssd where CodConfig=?";
-		SSD s=null;
+		List<SSD> s1=null;
 		try(PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)){
-			s=new SSD();
+			s1=new ArrayList<SSD>();
 			stm.setInt(1, id);
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
+				SSD s =new SSD();
 				s.setId(rs.getInt("Id"));
 				s.setNome(rs.getString("Nome"));
 				s.setCodconfing(rs.getInt("CodConfig"));
@@ -121,11 +122,12 @@ public class DAOSsdimpls implements DAOSsd {
 				s.setCapacita(rs.getString("Capacita"));
 				s.setQuantita(rs.getInt("Quantita"));
 				s.setPrezzo(rs.getInt("Prezzo"));
+				s1.add(s);
 			}
 		}catch (Exception e) {
 			
 		}
-		return s;
+		return s1;
 	}
 
 }

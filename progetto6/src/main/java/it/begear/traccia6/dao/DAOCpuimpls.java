@@ -116,14 +116,15 @@ public class DAOCpuimpls implements DAOCpu {
 	}
 
 	@Override
-	public CPU readCPUcompatibile(int id) {
+	public List<CPU> readCPUcompatibile(int id) {
 		String sql = "SELECT * FROM cpu WHERE CodConfig=?";
-		CPU c = null;
+		List<CPU> cp = null;
 		try (PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
-			c = new CPU();
+			cp = new ArrayList<CPU>();
 			stm.setInt(1, id);
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
+				CPU c = new CPU();
 				c.setId(rs.getInt("Id"));
 				c.setNome(rs.getString("Nome"));
 				c.setCodiceconfig(rs.getInt("CodConfig"));
@@ -132,13 +133,14 @@ public class DAOCpuimpls implements DAOCpu {
 				c.setFrequenza(rs.getString("FrequenzaCore"));
 				c.setQuantita(rs.getInt("Quantita"));
 				c.setPrezzo(rs.getInt("Prezzo"));
+				cp.add(c);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return c;
+		return cp;
 	}
 
 }

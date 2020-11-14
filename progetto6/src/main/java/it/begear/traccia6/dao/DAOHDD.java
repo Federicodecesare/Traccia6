@@ -11,7 +11,7 @@ public interface DAOHDD {
 	boolean updateHDD(HDD hdd);
 	boolean deleteHDD(int Id);
 	List<HDD> readAllHDD();
-	HDD readHDDcompatibile(int Id);
+	List<HDD> readHDDcompatibile(int Id);
 	
 	
 	

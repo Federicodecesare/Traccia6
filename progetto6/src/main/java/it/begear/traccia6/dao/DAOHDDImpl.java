@@ -146,16 +146,19 @@ public class DAOHDDImpl implements DAOHDD {
 	}
 
 	@Override
-	public HDD readHDDcompatibile(int Id) {
+	public List<HDD> readHDDcompatibile(int Id) {
 		String sql = "SELECT * FROM hdd WHERE CodConfig=?";
 		HDD hdd = null;
+		List<HDD> list = null;
 
 		try (PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
-			hdd = new HDD();
+
+			list = new ArrayList<HDD>();
 			stm.setInt(1, Id);
 			ResultSet result = stm.executeQuery();
 
 			while (result.next()) {
+				hdd = new HDD();
 
 				hdd.setId(result.getInt("Id"));
 				hdd.setProduttore(result.getString("Produttore"));
@@ -165,12 +168,13 @@ public class DAOHDDImpl implements DAOHDD {
 				hdd.setQuantita(result.getInt("Quantita"));
 				hdd.setPrezzo(result.getInt("Prezzo"));
 
+				list.add(hdd);
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return hdd;
+		return list;
 	}
 
 }

@@ -13,6 +13,6 @@ public interface DAORam {
 	boolean updateRam(Ram ram);
 	
 	List<Ram> readAll();	
-	Ram  readRamcompatibile(int Id); 
+	List<Ram>  readRamcompatibile(int Id); 
 
 }
