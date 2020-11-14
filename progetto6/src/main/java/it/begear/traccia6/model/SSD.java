@@ -9,6 +9,15 @@ private int codconfing;
 private int quantita;
 private int prezzo;
 public SSD() {}
+public SSD(String produttore, String nome, String capacita, int codconfing, int quantita, int prezzo) {
+
+	this.produttore = produttore;
+	this.nome = nome;
+	this.capacita = capacita;
+	this.codconfing = codconfing;
+	this.quantita = quantita;
+	this.prezzo = prezzo;
+}
 public SSD(int id, String produttore, String nome, String capacita, int codconfing, int quantita, int prezzo) {
 	super();
 	this.id = id;

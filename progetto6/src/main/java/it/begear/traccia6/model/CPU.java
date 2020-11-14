@@ -11,6 +11,18 @@ public class CPU {
 	private int prezzo;
 	public CPU() {
 	}
+	public CPU(String nome, int codiceconfig, String produttore, String numerocore, String frequenza,
+			int quantita, int prezzo) {
+
+		this.nome = nome;
+		this.codiceconfig = codiceconfig;
+		this.produttore = produttore;
+		this.numerocore = numerocore;
+		this.frequenza = frequenza;
+		this.quantita = quantita;
+		this.prezzo = prezzo;
+	}
+	
 	public CPU(int id, String nome, int codiceconfig, String produttore, String numerocore, String frequenza,
 			int quantita, int prezzo) {
 		super();

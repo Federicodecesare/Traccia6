@@ -16,7 +16,16 @@ public class Ram {
 		// TODO Auto-generated constructor stub
 	}
 
-
+	public Ram(String nome, String produttore, String capacita, int codConfig, int quantita, int prezzo) {
+		
+		Nome = nome;
+		Produttore = produttore;
+		Capacita = capacita;
+		CodConfig = codConfig;
+		Quantita = quantita;
+		Prezzo = prezzo;
+	}
+	
 	public Ram(int id, String nome, String produttore, String capacita, int codConfig, int quantita, int prezzo) {
 		super();
 		Id = id;
