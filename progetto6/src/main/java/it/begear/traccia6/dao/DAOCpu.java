@@ -9,5 +9,6 @@ CPU readCPU(int id);
 List<CPU> readallCPU();
 boolean insertCpu(CPU c);
 boolean updateCpu(CPU c);
+CPU readCPUcompatibile(int id);
 
 }

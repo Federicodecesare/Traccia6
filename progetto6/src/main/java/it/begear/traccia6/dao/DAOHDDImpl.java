@@ -22,7 +22,7 @@ public class DAOHDDImpl implements DAOHDD {
 		return instance;
 	}
 
-	public boolean createHDD(HDD hdd, boolean b) {
+	public boolean createHDD(HDD hdd) {
 
 		String sql = "INSERT INTO hdd(Id,Produttore,Nome,Capacita,CodConfig,Quantita,Prezzo) VALUES (?,?,?,?,?,?,?)";
 
@@ -39,14 +39,13 @@ public class DAOHDDImpl implements DAOHDD {
 			stm.execute();
 			stm.getConnection().commit();
 
-			b = true;
+			return true;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			b = false;
+			return false;
 		}
-		return b;
 
 	}
 
@@ -79,7 +78,7 @@ public class DAOHDDImpl implements DAOHDD {
 
 	}
 
-	public boolean updateHDD(HDD hdd, boolean b) {
+	public boolean updateHDD(HDD hdd) {
 
 		String sql = "UPDATE hdd SET Prezzo=? WHERE Id=?";
 		try (PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
@@ -88,30 +87,28 @@ public class DAOHDDImpl implements DAOHDD {
 			stm.setInt(2, hdd.getId());
 
 			stm.execute();
-			b = true;
+			return true;
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			b = false;
-		}
-		return b;
+			return false;
+		} 
 
 	}
 
-	public boolean deleteHDD(int Id, boolean b) {
+	public boolean deleteHDD(int Id) {
 
 		String sql = "DELETE FROM hdd WHERE Id=?";
 		try (PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
 
 			stm.setInt(1, Id);
 			stm.execute();
-			b = true;
+			return true;
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			b = false;
+			return false;
 		}
-		return b;
 
 	}
 
@@ -146,6 +143,34 @@ public class DAOHDDImpl implements DAOHDD {
 		}
 		return list;
 
+	}
+
+	@Override
+	public HDD readHDDcompatibile(int Id) {
+		String sql = "SELECT * FROM hdd WHERE CodConfig=?";
+		HDD hdd = null;
+
+		try (PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
+			hdd = new HDD();
+			stm.setInt(1, Id);
+			ResultSet result = stm.executeQuery();
+
+			while (result.next()) {
+
+				hdd.setId(result.getInt("Id"));
+				hdd.setProduttore(result.getString("Produttore"));
+				hdd.setNome(result.getString("Nome"));
+				hdd.setCapacita(result.getString("Capacita"));
+				hdd.setCodConfig(result.getInt("CodConfig"));
+				hdd.setQuantita(result.getInt("Quantita"));
+				hdd.setPrezzo(result.getInt("Prezzo"));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return hdd;
 	}
 
 }

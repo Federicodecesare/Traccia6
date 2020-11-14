@@ -6,12 +6,12 @@ import it.begear.traccia6.model.HDD;
 
 public interface DAOHDD {
 
-	boolean createHDD(HDD hdd, boolean b);
+	boolean createHDD(HDD hdd);
 	HDD readHDD(int Id);
-	boolean updateHDD(HDD hdd, boolean b);
-	boolean deleteHDD(int Id, boolean b);
+	boolean updateHDD(HDD hdd);
+	boolean deleteHDD(int Id);
 	List<HDD> readAllHDD();
-	
+	HDD readHDDcompatibile(int Id);
 	
 	
 	

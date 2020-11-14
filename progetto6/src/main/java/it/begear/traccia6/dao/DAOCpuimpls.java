@@ -115,4 +115,30 @@ public class DAOCpuimpls implements DAOCpu {
 	
 	}
 
+	@Override
+	public CPU readCPUcompatibile(int id) {
+		String sql = "SELECT * FROM cpu WHERE CodConfig=?";
+		CPU c = null;
+		try (PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
+			c = new CPU();
+			stm.setInt(1, id);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				c.setId(rs.getInt("Id"));
+				c.setNome(rs.getString("Nome"));
+				c.setCodiceconfig(rs.getInt("CodConfig"));
+				c.setProduttore(rs.getString("Produttore"));
+				c.setNumerocore(rs.getString("NumeroCore"));
+				c.setFrequenza(rs.getString("FrequenzaCore"));
+				c.setQuantita(rs.getInt("Quantita"));
+				c.setPrezzo(rs.getInt("Prezzo"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+
 }

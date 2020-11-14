@@ -6,12 +6,13 @@ import it.begear.traccia6.model.Ram;
 
 public interface DAORam {
 	
-	void createRam(Ram ram);
+	boolean createRam(Ram ram);
 	
 	Ram  readRam(int Id); 
 	
-	void updateRam(Ram ram);
+	boolean updateRam(Ram ram);
 	
 	List<Ram> readAll();	
+	Ram  readRamcompatibile(int Id); 
 
 }

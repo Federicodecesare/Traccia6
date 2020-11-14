@@ -105,5 +105,27 @@ public class DAOSsdimpls implements DAOSsd {
 		}
 
 	}
+	@Override
+	public SSD readSsdcompatibile(int id) {
+		String sql="Select * FROM ssd where CodConfig=?";
+		SSD s=null;
+		try(PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)){
+			s=new SSD();
+			stm.setInt(1, id);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				s.setId(rs.getInt("Id"));
+				s.setNome(rs.getString("Nome"));
+				s.setCodconfing(rs.getInt("CodConfig"));
+				s.setProduttore(rs.getString("Produttore"));
+				s.setCapacita(rs.getString("Capacita"));
+				s.setQuantita(rs.getInt("Quantita"));
+				s.setPrezzo(rs.getInt("Prezzo"));
+			}
+		}catch (Exception e) {
+			
+		}
+		return s;
+	}
 
 }

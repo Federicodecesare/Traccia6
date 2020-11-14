@@ -29,7 +29,7 @@ private static DAORamImpl instance = null;
 	
 	
 
-	public void createRam(Ram ram) {
+	public boolean createRam(Ram ram) {
 		String sql = "INSERT INTO ram(Id, Nome, Produttore, Capacita, CodConfig, Quantita, Prezzo) VALUES (?,?,?,?,?,?,?)";
 		
 		try(PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
@@ -42,9 +42,10 @@ private static DAORamImpl instance = null;
 			stm.setInt(6, ram.getQuantita());
 			stm.setInt(7, ram.getPrezzo());
 			stm.execute();
-			
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 	}
@@ -78,7 +79,7 @@ private static DAORamImpl instance = null;
 	}
 	
 
-	public void updateRam(Ram ram) {
+	public boolean updateRam(Ram ram) {
 		String sql = "UPDATE ram SET  Nome=?, Produttore=?, Capacita=?, CodConfig=?, Quantita=?, Prezzo=? WHERE Id = ?";
 		
 		try(PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
@@ -92,10 +93,11 @@ private static DAORamImpl instance = null;
 			stm.setInt(6, ram.getPrezzo());
 			stm.setInt(7, ram.getId());
 			stm.execute();
-			
+			return true;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 		
 	}
@@ -129,6 +131,35 @@ private static DAORamImpl instance = null;
 		}
 
 		return list;
+	}
+
+	@Override
+	public Ram readRamcompatibile(int Id) {
+		String sql = "SELECT * FROM ram WHERE CodConfig = ?";
+		Ram ram = null;
+		
+		try(PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
+			
+			ram = new Ram();
+			stm.setInt(1, Id);
+			ResultSet result = stm.executeQuery();
+			
+			while (result.next()) {
+				
+				ram.setId(result.getInt("Id"));
+				ram.setNome(result.getString("Nome"));
+				ram.setProduttore(result.getString("Produttore"));
+				ram.setCapacita(result.getString("Capacita"));
+				ram.setCodConfig(result.getInt("CodConfig"));
+				ram.setQuantita(result.getInt("Quantita"));
+				ram.setPrezzo(result.getInt("Prezzo"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();			
+		}
+		return ram;
 	}
 
 }
