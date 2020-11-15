@@ -30,11 +30,11 @@ public class DAOComputerImpl implements DAOComputer{
 	
 	@Override
 	public boolean createComputer(Computer computer) {
-		String sql = "INSERT INTO computer(Id, NomeCase, IDCPU, IDMB, IDRAM, IDHDD,IDSSD) VALUES(?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO computer(NomeCase, IDCPU, IDMB, IDRAM, IDHDD,IDSSD) VALUES(?,?,?,?,?,?)";
 		
 		try(PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
 			
-			stm.setInt(1, computer.getId());
+	
 			stm.setString(2, computer.getNomeCase());
 			stm.setInt(3, computer.getIDCPU());
 			stm.setInt(4, computer.getIDMB());
@@ -134,4 +134,8 @@ public class DAOComputerImpl implements DAOComputer{
 		
 		return list;
 	}
+
+	
+
+	
 }

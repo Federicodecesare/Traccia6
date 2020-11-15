@@ -20,13 +20,14 @@ import it.begear.traccia6.model.HDD;
 import it.begear.traccia6.model.MotherBoard;
 import it.begear.traccia6.model.Ram;
 import it.begear.traccia6.model.SSD;
+import it.begear.traccia6.utils.Gestionemagazzino;
 import it.begear.traccia6.utils.ScannerClass;
 import it.begear.traccia6.view.Cli;
 
 public class Controller {
 
 	public static void main(String[] args) {
-		
+		Gestionemagazzino.inizializzadb();
 
 		int K = 0;
 		while (K != 6) {
@@ -36,19 +37,20 @@ public class Controller {
 			switch (K) {
 			case 1:
 				// assemblare pc
+				Gestionemagazzino.assemblaggio();
 				break;
 			case 2:
 				// modifica componenti del pc
 				break;
 			case 3:
-				// acquista nuovi prodotti pc
+				// acquista nuovi prodotti pc -- finito
 				Acquista();
 				break;
 			case 4:
-				// Vendere pc
+				Gestionemagazzino.vendita();
 				break;
 			case 5:
-				// visualizzare
+				// visualizzare -- finito
 				VisualizzaMagazzino();
 				break;
 
@@ -96,72 +98,14 @@ public class Controller {
 
 	private static void Acquista() {
 
-		int K = 0;
+		int k = 0;
 		System.out.println("Quale componente vuoi aquistare?");
 
-		while (K != 6) {
+		do  {
 			Cli.optionsBuy();
-
-			switch (K) {
-			case 1:
-				CPU cpu = new CPU(ScannerClass.inserisciStringa("Inserisci Nome"), 
-								ScannerClass.inserisciIntero("Inserisci Codice Configurazione"), 
-								ScannerClass.inserisciStringa("Inserisci Produttore"), 
-								ScannerClass.inserisciStringa("Inserisci Numero Core"), 
-								ScannerClass.inserisciStringa("Inserisci Frequenza Core"), 
-								ScannerClass.inserisciIntero("Inserisci la Quantita"), 
-								ScannerClass.inserisciIntero("Inserisci Prezzo"));
-				DAOCpu daoCpu = DAOCpuimpls.getInstance();
-				daoCpu.insertCpu(cpu);
-				break;
-			case 2:
-				MotherBoard mb = new MotherBoard(ScannerClass.inserisciStringa("Inserisci Produttore"), 
-						ScannerClass.inserisciStringa("Inserisci Nome"), 
-						ScannerClass.inserisciStringa("Inserisci Ram"), 
-						ScannerClass.inserisciStringa("Inserisci Hdd"), 
-						ScannerClass.inserisciStringa("Inserisci Ssd"), 
-						ScannerClass.inserisciIntero("Inserisci Codice Configurazione"), 
-						ScannerClass.inserisciIntero("Inserisci la Quantita"), 
-						ScannerClass.inserisciIntero("Inserisci Prezzo"));
-				DAOMotherBoard daoMotherBoard = DAOMotherBoardImpl.getInstance();
-				daoMotherBoard.insertMotherBoard(mb);
-				break;
-			case 3:
-				Ram ram = new Ram(ScannerClass.inserisciStringa("Inserisci Nome"), 
-						ScannerClass.inserisciStringa("Inserisci Produttore"), 
-						ScannerClass.inserisciStringa("Inserisci Capacita"), 
-						ScannerClass.inserisciIntero("Inserisci Codice Configurazione"), 
-						ScannerClass.inserisciIntero("Inserisci la Quantita"), 
-						ScannerClass.inserisciIntero("Inserisci Prezzo"));
-				DAORam daoRam = DAORamImpl.getInstance();
-				daoRam.createRam(ram);
-				break;
-			case 4:
-				HDD hdd = new HDD(ScannerClass.inserisciStringa("Inserisci Produttore"),
-						ScannerClass.inserisciStringa("Inserisci Nome"),
-						ScannerClass.inserisciStringa("Inserisci Capacita"),
-						ScannerClass.inserisciIntero("Inserisci Codice Configurazione"),
-						ScannerClass.inserisciIntero("Inserisci la Quantita"),
-						ScannerClass.inserisciIntero("Inserisci Prezzo"));
-				DAOHDD daoHDD = DAOHDDImpl.getInstance();
-				daoHDD.createHDD(hdd);
-				break;
-			case 5:
-				SSD ssd = new SSD(ScannerClass.inserisciStringa("Inserisci Produttore"), 
-						ScannerClass.inserisciStringa("Inserisci Nome"), 
-						ScannerClass.inserisciStringa("Inserisci Capacita"), 
-						ScannerClass.inserisciIntero("Inserisci Codice Configurazione"), 
-						ScannerClass.inserisciIntero("Inserisci la Quantita"), 
-						ScannerClass.inserisciIntero("Inserisci Prezzo"));
-				DAOSsd daoSsd = DAOSsdimpls.getInstance();
-				daoSsd.insertSsd(ssd);
-				
-				break;
-
-			default:
-				break;
-			}
-		}
+			k=ScannerClass.inserisciIntero("");
+			Gestionemagazzino.Acquista(k);
+		}while (k != 6);
 	}
 
 

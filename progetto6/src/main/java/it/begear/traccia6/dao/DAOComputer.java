@@ -7,6 +7,8 @@ import it.begear.traccia6.model.Computer;
 public interface DAOComputer {
 
 	boolean createComputer(Computer computer);
+	
+
 
 	Computer readComputer(int Id);
 

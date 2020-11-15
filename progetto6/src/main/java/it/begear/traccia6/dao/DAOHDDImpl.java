@@ -24,20 +24,17 @@ public class DAOHDDImpl implements DAOHDD {
 
 	public boolean createHDD(HDD hdd) {
 
-		String sql = "INSERT INTO hdd(Id,Produttore,Nome,Capacita,CodConfig,Quantita,Prezzo) VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO hdd(Produttore,Nome,Capacita,CodConfig,Quantita,Prezzo) VALUES (?,?,?,?,?,?)";
 
 		try (PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
 
-			stm.getConnection().setAutoCommit(false);
-			stm.setInt(1, hdd.getId());
-			stm.setString(2, hdd.getProduttore());
-			stm.setString(3, hdd.getNome());
-			stm.setString(4, hdd.getCapacita());
-			stm.setInt(5, hdd.getCodConfig());
-			stm.setInt(6, hdd.getQuantita());
-			stm.setInt(7, hdd.getPrezzo());
+			stm.setString(1, hdd.getProduttore());
+			stm.setString(2, hdd.getNome());
+			stm.setString(3, hdd.getCapacita());
+			stm.setInt(4, hdd.getCodConfig());
+			stm.setInt(5, hdd.getQuantita());
+			stm.setInt(6, hdd.getPrezzo());
 			stm.execute();
-			stm.getConnection().commit();
 
 			return true;
 
@@ -175,6 +172,30 @@ public class DAOHDDImpl implements DAOHDD {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public boolean createHDDconid(HDD hdd) {
+		String sql = "INSERT INTO hdd(Id,Produttore,Nome,Capacita,CodConfig,Quantita,Prezzo) VALUES (?,?,?,?,?,?,?)";
+
+		try (PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)) {
+			stm.setInt(1, hdd.getId());
+			stm.setString(2, hdd.getProduttore());
+			stm.setString(3, hdd.getNome());
+			stm.setString(4, hdd.getCapacita());
+			stm.setInt(5, hdd.getCodConfig());
+			stm.setInt(6, hdd.getQuantita());
+			stm.setInt(7, hdd.getPrezzo());
+			stm.execute();
+
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			return false;
+		}
+
 	}
 
 }

@@ -18,6 +18,17 @@ public class Computer {
 	}
 
 
+	public Computer(String nomeCase, int iDCPU, int iDMB, int iDRAM, int iDHDD, int iDSSD) {
+		super();
+		NomeCase = nomeCase;
+		IDCPU = iDCPU;
+		IDMB = iDMB;
+		IDRAM = iDRAM;
+		IDHDD = iDHDD;
+		IDSSD = iDSSD;
+	}
+
+
 	public Computer(int id, String nomeCase, int iDCPU, int iDMB, int iDRAM, int iDHDD, int iDSSD) {
 		super();
 		Id = id;

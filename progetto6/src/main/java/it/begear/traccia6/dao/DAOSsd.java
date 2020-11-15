@@ -8,6 +8,7 @@ public interface DAOSsd {
 SSD readSsd(int id);
 List<SSD> readallSsd();
 boolean insertSsd(SSD s);
+boolean insertSsdconid(SSD s);
 boolean updateSsd(SSD s);
 List<SSD> readSsdcompatibile(int id);
 }

@@ -129,5 +129,23 @@ public class DAOSsdimpls implements DAOSsd {
 		}
 		return s1;
 	}
-
+	@Override
+	public boolean insertSsdconid(SSD s) {
+		String sql="INSERT INTO ssd (Id,Nome,CodConfig,Produttore,Capacita,Quantita,Prezzo) VALUES(?,?,?,?,?,?,?)";
+		try(PreparedStatement stm = ConnectionManager.getConnection().prepareStatement(sql)){
+			stm.setInt(1, s.getId());
+			stm.setString(2, s.getNome());
+			stm.setInt(3, s.getCodconfing());
+			stm.setString(4, s.getProduttore());
+			stm.setString(5, s.getCapacita());
+			stm.setInt(6, s.getQuantita());
+			stm.setInt(7, s.getPrezzo());
+			stm.execute();
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+			return false;
+	}
+	}
 }

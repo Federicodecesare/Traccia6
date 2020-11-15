@@ -12,7 +12,7 @@ public interface DAOHDD {
 	boolean deleteHDD(int Id);
 	List<HDD> readAllHDD();
 	List<HDD> readHDDcompatibile(int Id);
-	
+	boolean createHDDconid(HDD hdd);
 	
 	
 }
