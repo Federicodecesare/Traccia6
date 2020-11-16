@@ -25,5 +25,13 @@ public class Cli {
 		
 		
 	}
+public static void optionsBuy1() {
+		
+		System.out.println("1. CPU");
+		System.out.println("2. RAM");
+		System.out.println("3. HDD");
+		System.out.println("4. SSD");
+		
+	}
 	
 }

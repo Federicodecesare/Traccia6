@@ -40,7 +40,7 @@ public class Controller {
 				Gestionemagazzino.assemblaggio();
 				break;
 			case 2:
-				// modifica componenti del pc
+				Gestionemagazzino.Componenti();
 				break;
 			case 3:
 				// acquista nuovi prodotti pc -- finito

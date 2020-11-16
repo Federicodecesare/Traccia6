@@ -18,6 +18,7 @@ import it.begear.traccia6.model.HDD;
 import it.begear.traccia6.model.MotherBoard;
 import it.begear.traccia6.model.Ram;
 import it.begear.traccia6.model.SSD;
+import it.begear.traccia6.view.Cli;
 
 public class Gestionemagazzino {
 
@@ -314,6 +315,43 @@ public class Gestionemagazzino {
 		for (Computer c : daocomputer.readAll()) {
 				System.out.println(c);
 		}
+		
+	}
+
+	public static void Componenti() {
+		DAOComputer daocomputer= DAOComputerImpl.getInstance();
+		System.out.println("Scegli il computer da modificare");
+		stampaComputer();
+		Computer c = daocomputer.readComputer(ScannerClass.inserisciIntero(""));
+		DAOCpu daocpu = DAOCpuimpls.getInstance();
+		CPU cpu = daocpu.readCPU(c.getIDCPU());
+		int cod=cpu.getCodiceconfig();
+		System.out.println("cosa vuoi cambiare?");
+		Cli.optionsBuy();
+		int scelta=ScannerClass.inserisciIntero("");
+		switch(scelta) {
+		case 1 :System.out.println("Scegli il nuovo componente");
+				stampaCpu(cod);
+				c.setIDCPU(ScannerClass.inserisciIntero(""));
+			break;
+		case 2:
+			System.out.println("Scegli il nuovo componente");
+			stampaRam(cod);
+			c.setIDRAM(ScannerClass.inserisciIntero(""));
+			break;
+		case 3:
+			System.out.println("Scegli il nuovo componente");
+			stampaHdd(cod);
+			c.setIDHDD(ScannerClass.inserisciIntero(""));
+			break;
+		case 4:
+			System.out.println("Scegli il nuovo componente");
+			stampaSdd(cod);
+			c.setIDSSD(ScannerClass.inserisciIntero(""));
+			break;
+	
+		}
+		daocomputer.updateComputer(c);
 		
 	}
 }
